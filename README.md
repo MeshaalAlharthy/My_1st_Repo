@@ -1,74 +1,68 @@
-# 🔒 Transactions Sensitivity Classification for Emirate of Makkah
-
-An advanced Arabic document classification project to predict the sensitivity level of Emirate of Makkah transaction documents. This system aims to support secure data governance and assist in quick, informed decision-making.
-
----
+# Transactions Sensitivity Classification (Emirate of Makkah)
 
 ## Project Overview
 
-This project goes beyond a standard fine-tuning of AraBERT. It introduces multiple new ideas to make the model suitable for real-world governmental use cases.
+This project showcases a custom Arabic document classification pipeline designed for Emirate of Makkah transactions. The main goal is to classify documents into different sensitivity levels ("Top Secret", "Secret", "Restricted", "Public") using advanced AI techniques.
+
+We built a completely customized approach using AraBERT and additional metadata features to make the model better understand context and administrative relationships.
 
 ---
 
-## Customizations and Innovations
+## Motivation
 
-- Special token [SEC]: Added to highlight important keywords related to security and improve context understanding.
-- Admin-aware metadata integration: The الإدارة (Administration) column was encoded using one-hot encoding and passed through a custom neural network layer, so the model learns organizational context, not just text.
-- Dual embedding strategy: We combined the CLS token embedding and mean-pooled embeddings to better represent full-document semantics.
-- Balanced focal loss: A custom loss function with class weights to handle data imbalance and improve predictions for rare classes like "Top Secret".
-- LoRA fine-tuning: Used Low-Rank Adaptation (LoRA) for efficient fine-tuning, reducing training costs while keeping high accuracy.
+Traditional text classification approaches often rely only on the raw text content. In this project, we wanted to push beyond that by integrating **administrative metadata** (the column "الإدارة") to help the model capture organizational context, which is crucial in government and sensitive data settings.
 
 ---
 
-## Classification Labels
+## Pipeline Highlights
 
-The model classifies documents into four levels:
+- **Custom text preprocessing**: Combined multiple descriptive columns (such as key identifiers, data types, process descriptions) into a unified input field with a special `[SEC]` token for better guidance to the model.
 
-- Top Secret (سري للغاية)
-- Secret (سري)
-- Restricted (مقيد)
-- Public (عام)
+- **Admin metadata integration**: One-hot encoded the "الإدارة" (admin department) column and incorporated it into the model architecture, allowing the network to learn additional patterns beyond text alone.
 
----
+- **Customized AraBERT architecture**: 
+  - Used AraBERT (aubmindlab/bert-base-arabertv02) as a backbone.
+  - Integrated admin features through a dedicated feed-forward network layer.
+  - Combined CLS embeddings, mean-pooled embeddings, and admin features into a unified final classification layer.
 
-## Dataset
+- **Balanced focal loss**: Applied a custom-balanced focal loss to handle class imbalance and improve performance, especially for rare sensitivity classes.
 
-Source: Emirate of Makkah transaction data.
+- **Data augmentation**: Used oversampling for minority classes to further improve generalization.
 
-Text columns included:
-
-- Keywords and unique identifiers
-- Process description
-- Expected impact (financial, reputation, health, safety, operational, security, stakeholders)
-- Type of personal data
-- Related forms
-
-Additional metadata column:
-
--  (Administration), used as extra features to improve prediction accuracy.
-
----
-
-## Technical Highlights
-
-- Base model: aubmindlab/bert-base-arabertv02
-- One-hot encoded admin metadata integrated with text embeddings
-- Custom balanced focal loss to solve imbalance issues
-- LoRA for efficient and lightweight parameter tuning
-- Advanced preprocessing combining multiple Arabic text columns
+- **Early stopping and weighted metrics**: Adopted early stopping and custom evaluation metrics focusing on weighted F1 score to ensure robust model performance.
 
 ---
 
 ## Results
 
-- Weighted F1-score above 94%
-- Improved performance on rare classes
-- High robustness against noisy real-world data
-- Ready to support secure classification workflows in practical scenarios
+The model achieved high accuracy and strong class-wise F1 scores, demonstrating its capability to handle sensitive document classification tasks.
+
+<p align="center">
+  <img src="Accuracy.png" alt="Accuracy Chart" width="500"/>
+</p>
+
+<p align="center">
+  <img src="examplr use.png" alt="Example Usage" width="500"/>
+</p>
 
 ---
 
-## Usage
+## Project Pipeline
+
+A detailed step-by-step pipeline diagram is included in [Project pipeline PDF](Project%20pipline.pdf).  
+
+---
+
+## Files
+
+- `Transactions_Sensitivity_Classification.ipynb`: Complete notebook containing all code, data preparation, and training steps.
+- `Accuracy.png`, `examplr use.png`: Visual results and example usage.
+- `Project pipline.pdf`: Diagram outlining the full workflow and architecture.
+- `README.md`: This description file.
+
+---
+
+## How to Use
 
 ### Installation
 
