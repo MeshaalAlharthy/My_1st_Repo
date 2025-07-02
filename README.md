@@ -4,13 +4,11 @@
 
 This project showcases a custom Arabic document classification pipeline designed for Emirate of Makkah transactions. The main goal is to classify documents into different sensitivity levels ("Top Secret", "Secret", "Restricted", "Public") specially for future documents containing unseen terms beyond the training set using advanced AI techniques.
 
-We built a completely customized approach using AraBERT and additional metadata features to make the model better understand context and administrative relationships.
-
 ---
 
 ## Motivation
 
-Traditional text classification approaches often rely only on the raw text content. In this project, we wanted to push beyond that by integrating **administrative metadata** (the column "الإدارة") to help the model capture organizational context, which is crucial in government and sensitive data settings.
+Traditional text classification approaches often rely only on the raw text content. In this project, I wanted to push beyond that by integrating **administrative metadata** (the column "الإدارة") to help the model capture organizational context, which is crucial in government and sensitive data settings.
 
 ---
 
