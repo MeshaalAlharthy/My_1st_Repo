@@ -14,6 +14,8 @@ Traditional text classification approaches often rely only on the raw text conte
 
 ## Pipeline Highlights
 
+- **Data augmentation**: Used oversampling for minority classes to further improve generalization.
+
 - **Custom text preprocessing**: Combined multiple descriptive columns (such as key identifiers, data types, process descriptions) into a unified input field with a special `[SEC]` token for better guidance to the model.
 
 - **Admin metadata integration**: One-hot encoded the "الإدارة" (admin department) column and incorporated it into the model architecture, allowing the network to learn additional patterns beyond text alone.
@@ -24,8 +26,6 @@ Traditional text classification approaches often rely only on the raw text conte
   - Combined CLS embeddings, mean-pooled embeddings, and admin features into a unified final classification layer.
 
 - **Balanced focal loss**: Applied a custom-balanced focal loss to handle class imbalance and improve performance, especially for rare sensitivity classes.
-
-- **Data augmentation**: Used oversampling for minority classes to further improve generalization.
 
 - **Early stopping and weighted metrics**: Adopted early stopping and custom evaluation metrics focusing on weighted F1 score to ensure robust model performance.
 
